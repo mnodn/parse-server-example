@@ -45,7 +45,7 @@ app.get('/test', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/test.html'));
 });
 
-app.get('/login', function(req, res) {
+app.post('/login', function(req, res) {
   console.log(`${JSON.stringify(req.params)}`);
   var user = new Parse.User();
   user.set("username", req.params.actionData.email);

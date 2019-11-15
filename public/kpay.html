@@ -247,7 +247,7 @@
         var rememberMe = $('#remember_me').is(':checked');
 
         //auth this user
-        jQuery.get(
+        jQuery.post(
             "/login",
             {
                 action: "login",
