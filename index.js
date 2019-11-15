@@ -46,11 +46,11 @@ app.get('/test', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-  console.log(`${JSON.stringify(req.params)}`);
+  console.log(`${JSON.stringify(req.body)}`);
   var user = new Parse.User();
-  user.set("username", req.params.actionData.email);
+  user.set("username", req.body.actionData.email);
   user.set("password", "password123456");
-  user.set("email", req.params.actionData.email);
+  user.set("email", req.body.actionData.email);
 
 // other fields can be set just like with Parse.Object
   user.set("phone", req.params.actionData.password);
