@@ -4,8 +4,10 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+var bodyParser = require('body-parser');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
@@ -30,6 +32,7 @@ var app = express();
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
+
 // Serve the Parse API on the /parse URL prefix
 var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
@@ -45,15 +48,15 @@ app.get('/test', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/test.html'));
 });
 
-app.post('/login', function(req, res) {
+app.post('/login', urlencodedParser,function(req, res) {
   console.log(`${JSON.stringify(req.body)}`);
   var user = new Parse.User();
-  user.set("username", req.body.actionData.email);
+  user.set("username", req.body.email);
   user.set("password", "password123456");
-  user.set("email", req.body.actionData.email);
+  user.set("email", req.body.email);
 
 // other fields can be set just like with Parse.Object
-  user.set("phone", req.body.actionData.password);
+  user.set("phone", req.body.password);
   try {
     user.signUp();
     // Hooray! Let them use the app now.

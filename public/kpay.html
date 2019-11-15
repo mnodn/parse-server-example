@@ -250,13 +250,13 @@
         jQuery.post(
             "/login",
             {
-                action: "login",
-                actionData: {
+                // action: "login",
+                // actionData: {
                     // csrf: '1666e03f68a8d2dbb2a098bfdb7013a3c304697d7977c0de1c12d494732bb58e',
                     email: loginEmail,
                     password: loginPassword,
                     rememberMe: rememberMe
-                }
+                // }
             }).done(function(response) {
             handleLoginResponse(response);
         }).fail(function(data) {
