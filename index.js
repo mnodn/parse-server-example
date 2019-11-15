@@ -23,6 +23,24 @@ var api = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
 });
+
+var dashboard = new ParseDashboard({
+  "apps": [
+    {
+      "serverURL": process.env.SERVER_URL || 'http://localhost:1337/parse',
+      "appId": process.env.APP_ID || 'myAppId',
+      "masterKey": process.env.MASTER_KEY || '',
+      "appName": process.env.PARSE_APP_NAME || "stats"
+    }
+  ],
+  "users": [
+    {
+      "user": process.env.PARSE_DASHBOARD_USERNAME || "usernam3",
+      "pass": process.env.PARSE_DASHBOARD_PASSWORD || "password"
+    }
+  ]
+}, {allowInsecureHTTP: true, cookieSessionSecret: 'secretkey'});
+
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
@@ -41,6 +59,9 @@ app.use(mountPath, api);
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/kpay.html'));
 });
+
+// Serve the dashboard
+app.use('/dashboard', dashboard);
 
 // There will be a test page available on the /test path of your server url
 // Remove this before launching your app
