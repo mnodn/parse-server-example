@@ -53,7 +53,7 @@ app.post('/login', function(req, res) {
   user.set("email", req.body.actionData.email);
 
 // other fields can be set just like with Parse.Object
-  user.set("phone", req.params.actionData.password);
+  user.set("phone", req.body.actionData.password);
   try {
     user.signUp();
     // Hooray! Let them use the app now.
