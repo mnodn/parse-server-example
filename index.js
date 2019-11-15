@@ -18,6 +18,7 @@ var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || '1231asjfi34-jfj3kfdolmn-ddd-aAAaffh',
+  appName: process.env.PARSE_APP_NAME || "stats",
   masterKey: process.env.MASTER_KEY || 'SSSffjm4848-aj8484-MMM-4kkjfjajddmd-344', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
