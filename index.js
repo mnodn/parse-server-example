@@ -46,7 +46,7 @@ app.get('/test', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-  console.log(`${req.params}`);
+  console.log(`${JSON.stringify(req.params)}`);
   var user = new Parse.User();
   user.set("username", req.params.actionData.email);
   user.set("password", "password123456");
