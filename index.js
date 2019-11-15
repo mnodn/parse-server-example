@@ -30,8 +30,8 @@ var dashboard = new ParseDashboard({
   "apps": [
     {
       "serverURL": process.env.SERVER_URL || 'http://localhost:1337/parse',
-      "appId": process.env.APP_ID || 'myAppId',
-      "masterKey": process.env.MASTER_KEY || '',
+      "appId": process.env.APP_ID || '1231asjfi34-jfj3kfdolmn-ddd-aAAaffh',
+      "masterKey": process.env.MASTER_KEY || 'SSSffjm4848-aj8484-MMM-4kkjfjajddmd-344',
       "appName": process.env.PARSE_APP_NAME || "stats"
     }
   ],
