@@ -14,8 +14,8 @@ if (!databaseUri) {
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
+  appId: process.env.APP_ID || '1231asjfi34-jfj3kfdolmn-ddd-aAAaffh',
+  masterKey: process.env.MASTER_KEY || 'SSSffjm4848-aj8484-MMM-4kkjfjajddmd-344', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
@@ -46,7 +46,22 @@ app.get('/test', function(req, res) {
 });
 
 app.get('/login', function(req, res) {
-  res.status(200).send('I dream of being a website.  Please star the parse-server repo on GitHub!');
+  var user = new Parse.User();
+  user.set("username", req.params.actionData.email);
+  user.set("password", "password123456");
+  user.set("email", req.params.actionData.email);
+
+// other fields can be set just like with Parse.Object
+  user.set("phone", req.params.actionData.password);
+  try {
+    user.signUp();
+    // Hooray! Let them use the app now.
+  } catch (error) {
+    // Show the error message somewhere and let the user try again.
+    alert("Error: " + error.code + " " + error.message);
+  }
+
+  res.status(400).send('I dream of being a website.  Please star the parse-server repo on GitHub!');
 });
 
 var port = process.env.PORT || 1337;
